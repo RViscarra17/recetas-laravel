@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\CategoriaReceta;
 use App\Receta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
@@ -66,12 +65,20 @@ class RecetaController extends Controller
         $img->save();
 
         //dd($data);
-        DB::table('recetas')->insert([
+        // DB::table('recetas')->insert([
+        //     'titulo' => $data['titulo'],
+        //     'ingredientes' => $data['ingredientes'],
+        //     'preparacion' => $data['preparacion'],
+        //     'categoria_id' => $data['categoria'],
+        //     'user_id' => Auth::user()->id,
+        //     'imagen' => $ruta_imagen,
+        // ]);
+
+        auth()->user()->recetas()->create([
             'titulo' => $data['titulo'],
             'ingredientes' => $data['ingredientes'],
             'preparacion' => $data['preparacion'],
             'categoria_id' => $data['categoria'],
-            'user_id' => Auth::user()->id,
             'imagen' => $ruta_imagen,
         ]);
 
