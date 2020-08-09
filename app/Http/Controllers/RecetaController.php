@@ -93,7 +93,7 @@ class RecetaController extends Controller
      */
     public function show(Receta $receta)
     {
-        //
+        return view('recetas.show')->with('receta', $receta);
     }
 
     /**
