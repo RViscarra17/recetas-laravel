@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoriaReceta;
 use App\Receta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class RecetaController extends Controller
 {
@@ -20,7 +23,9 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        return view('recetas.index');
+        $recetas =auth()->user()->recetas;
+
+        return view('recetas.index')->with('recetas', $recetas);
     }
 
     /**
@@ -30,7 +35,11 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        return view('recetas.create');
+        //$categorias = DB::table('categoria_receta')->get()->pluck('nombre', 'id');
+
+        $categorias = CategoriaReceta::all(['id','nombre']);
+
+        return view('recetas.create')->with('categorias', $categorias);
     }
 
     /**
@@ -41,12 +50,29 @@ class RecetaController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request['imagen']->store('upload-recetas', 'public'));
+
         $data = request()->validate([
-            'titulo' => 'required|min:6'
+            'titulo' => 'required|min:6',
+            'categoria' => 'required',
+            'preparacion' => 'required',
+            'ingredientes' => 'required',
+            'imagen' => 'required|image',
         ]);
 
+        $ruta_imagen = $request['imagen']->store('upload-recetas', 'public');
+
+        $img = Image::make( public_path("storage/{$ruta_imagen}"))->fit(1000,550);
+        $img->save();
+
+        //dd($data);
         DB::table('recetas')->insert([
-            'titulo' => $data['titulo']
+            'titulo' => $data['titulo'],
+            'ingredientes' => $data['ingredientes'],
+            'preparacion' => $data['preparacion'],
+            'categoria_id' => $data['categoria'],
+            'user_id' => Auth::user()->id,
+            'imagen' => $ruta_imagen,
         ]);
 
         return redirect()->action('RecetaController@index');
