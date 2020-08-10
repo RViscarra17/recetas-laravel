@@ -1,5 +1,6 @@
 <?php
 
+use App\CategoriaReceta;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,46 +13,32 @@ class CategoriasSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categoria_recetas')->insert([
+        CategoriaReceta::create([
             'nombre' => 'Comida Mexicana',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        DB::table('categoria_recetas')->insert([
+        CategoriaReceta::create([
             'nombre' => 'Comida Italiana',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        DB::table('categoria_recetas')->insert([
+        CategoriaReceta::create([
             'nombre' => 'Comida Argentina',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        DB::table('categoria_recetas')->insert([
+        CategoriaReceta::create([
             'nombre' => 'Postres',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        DB::table('categoria_recetas')->insert([
+        CategoriaReceta::create([
             'nombre' => 'Cortes',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        DB::table('categoria_recetas')->insert([
+        CategoriaReceta::create([
             'nombre' => 'Ensaladas',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        DB::table('categoria_recetas')->insert([
+        CategoriaReceta::create([
             'nombre' => 'Desayunos',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }
 }
