@@ -5,7 +5,10 @@
 @endsection
 
 @section('botones')
-    <a class="btn btn-primary mr-2" href="{{ route('recetas.index') }}">Volver</a>
+    <a class="btn btn-outline-primary mr-2 text-uppercase font-weight-bold" href="{{ route('recetas.index') }}">
+        <svg class="icono" viewBox="0 0 20 20" fill="currentColor" class="arrow-circle-left w-6 h-6"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clip-rule="evenodd"></path></svg>
+        Volver
+    </a>
 @endsection
 
 @section('content')
